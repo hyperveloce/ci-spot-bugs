@@ -16,14 +16,14 @@ This repository provides a lightweight Alpine-based Docker container with [SpotB
 ### 1. Build the Docker Image
 
 ```bash
-docker build -t alpine-spotbugs .
+docker build -t spotbugs-findsecbugs .
 ```
 
 ### 2. Run the Container
 Mount your Java project's directory into the container so SpotBugs can scan your compiled code.
 
 ```bash
-docker run -it --rm -v "$PWD":/app alpine-spotbugs
+docker run -it --rm -v "$PWD":/app spotbugs-findsecbugs
 ```
 
 Replace $PWD with the path to your Java project if you're not in the root.
@@ -32,6 +32,5 @@ Replace $PWD with the path to your Java project if you're not in the root.
 Inside the container Analyze a compiled class directory
 
 ```bash
-cd /app
-spotbugs -textui target/classes
+spotbugs -textui -pluginList plugin/findsecbugs-plugin.jar /app/target/classes
 ```
